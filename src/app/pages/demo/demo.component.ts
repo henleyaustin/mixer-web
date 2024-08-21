@@ -1,5 +1,5 @@
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
-import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, TitleCasePipe } from '@angular/common';
@@ -10,21 +10,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {
-    MatDialog,
-    MatDialogActions,
-    MatDialogModule
-} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ProcessInfo } from '../../_models/ProcessInfo';
 import { ThemeService } from '../../_services/theme.service';
 import { IpInputComponent } from '../../components/ip-input/ip-input.component';
-import { SettingsComponent } from '../../components/settings/settings.component';
 import { ThemePickerComponent } from '../../components/theme-picker/theme-picker.component';
 import { VolumeSliderComponent } from '../../components/volume-slider/volume-slider.component';
 import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 export const demoList: ProcessInfo[] = [
     { name: 'Spotify', id: 1205, currentVolume: 37.27 },

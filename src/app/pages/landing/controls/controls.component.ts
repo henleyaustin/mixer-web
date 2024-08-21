@@ -23,6 +23,7 @@ import { IpInputComponent } from '../../../components/ip-input/ip-input.componen
 import { SettingsComponent } from '../../../components/settings/settings.component';
 import { ThemePickerComponent } from '../../../components/theme-picker/theme-picker.component';
 import { VolumeSliderComponent } from '../../../components/volume-slider/volume-slider.component';
+import { CacheKeys } from '../../../_models/CacheKeys';
 
 @Component({
     selector: 'app-controls',
@@ -57,30 +58,22 @@ export class ControlsComponent {
 
     selectedProcesses: ProcessInfo[] = [];
 
-    selectedProcessCacheKey = 'selected-processes';
-
     isLandscapeMobile: boolean = false;
-
-    constructor () {}
 
     ngOnInit (): void {
         this.apiService.refreshProcesses();
         this.selectedProcesses =
-            this.storageService.getLocalItem(this.selectedProcessCacheKey) ||
+            this.storageService.getLocalItem(CacheKeys.SELECTED_PROCESSES) ||
             [];
         const storedTheme = this.themeService.getStoredTheme();
         if (storedTheme) {
             this.themeService.setTheme(storedTheme);
         }
-        this.breakpointObserver
-            .observe([Breakpoints.HandsetLandscape])
-            .subscribe(result => {
-                this.isLandscapeMobile = result.matches;
-            });
+        this.checkLandscapeMobile();
     }
 
     updateSelection ($event: ProcessInfo[]) {
-        this.storageService.setLocalItem(this.selectedProcessCacheKey, $event);
+        this.storageService.setLocalItem(CacheKeys.SELECTED_PROCESSES, $event);
     }
 
     onVolumeChange ($event: { processId: number; newVolume: number }) {
@@ -91,16 +84,22 @@ export class ControlsComponent {
 
     openSettingsDialog (): void {
         const dialogRef = this.dialog.open(SettingsComponent, {
-            height: '150px'
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-            // You can perform actions here if needed after the dialog is closed
+            height: 'auto'
         });
     }
 
     compareProcesses (p1: ProcessInfo, p2: ProcessInfo): boolean {
         return p1 && p2 ? p1.id === p2.id : p1 === p2;
+    }
+
+    checkLandscapeMobile (): void {
+        this.breakpointObserver
+            .observe([
+                '(max-width: 767px) and (orientation: landscape)',
+                '(max-height: 500px) and (orientation: landscape)'
+            ])
+            .subscribe(result => {
+                this.isLandscapeMobile = result.matches;
+            });
     }
 }
