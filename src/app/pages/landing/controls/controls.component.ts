@@ -52,7 +52,6 @@ import { CacheKeys } from '../../../_models/CacheKeys';
 export class ControlsComponent {
     storageService = inject(StorageService);
     apiService = inject(ApiService);
-    themeService = inject(ThemeService);
     breakpointObserver = inject(BreakpointObserver);
     dialog = inject(MatDialog);
 
@@ -65,10 +64,7 @@ export class ControlsComponent {
         this.selectedProcesses =
             this.storageService.getLocalItem(CacheKeys.SELECTED_PROCESSES) ||
             [];
-        const storedTheme = this.themeService.getStoredTheme();
-        if (storedTheme) {
-            this.themeService.setTheme(storedTheme);
-        }
+
         this.checkLandscapeMobile();
     }
 

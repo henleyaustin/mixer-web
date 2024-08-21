@@ -39,10 +39,7 @@ export class AppComponent implements OnInit {
     private dialog = inject(MatDialog);
 
     ngOnInit (): void {
-        const storedTheme = this.themeService.getStoredTheme();
-        if (storedTheme) {
-            this.themeService.setTheme(storedTheme);
-        }
+        this.themeService.initializeThemes();
     }
 
     openInfoDialog (): void {

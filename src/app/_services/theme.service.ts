@@ -22,6 +22,13 @@ export class ThemeService {
     );
 
     /**
+     * Call at the beginning of the app to initialize the themes
+     */
+    initializeThemes () {
+        this.setTheme(this.currentThemeName());
+    }
+
+    /**
      * Sets the application's theme by updating the stylesheet link in the document's head.
      * The selected theme is also saved in local storage for persistence.
      * @param themeName - The name of the theme to set.
