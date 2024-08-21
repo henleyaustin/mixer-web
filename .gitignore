@@ -1,0 +1,78 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+firebase-debug.log*
+firebase-debug.*.log
+
+# Firebase cache
+.firebase/
+
+# Uncomment this if you'd like others to create their own Firebase project.
+# .firebaserc
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directories
+coverage/
+.nyc_output/
+
+# Grunt intermediate storage
+.grunt/
+
+# Bower dependency directory
+bower_components/
+
+# Node modules and binary addons
+node_modules/
+build/Release/
+
+# Cache directories and lock files
+.npm/
+.eslintcache
+.yarn-integrity
+.lock-wscript
+
+# Environment variables
+.env
+
+# Generated files
+.dataconnect
+*.tgz
+
+# IDE settings and editor-specific files
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/
+.history/
+
+# Compiled output and temporary files
+/dist/
+/tmp/
+/out-tsc/
+/bazel-out/
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+connect.lock
+libpeerconnection.log
+testem.log
+typings/
+
+# System files
+.DS_Store
+Thumbs.db

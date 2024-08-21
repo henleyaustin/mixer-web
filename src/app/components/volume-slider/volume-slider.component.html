@@ -1,0 +1,12 @@
+<div class="slider-container">
+    <p class="slider-label">{{ process().name | titlecase }}</p>
+    <div class="slider">
+        @if (toggleSlider) {
+        <ngx-slider
+            [(value)]="currentVolume"
+            [options]="options"
+            (userChangeEnd)="onVolumeChange()"
+        ></ngx-slider>
+        }
+    </div>
+</div>

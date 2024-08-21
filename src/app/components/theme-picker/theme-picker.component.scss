@@ -1,0 +1,26 @@
+.docs-theme-picker-trigger {
+    color: inherit;
+}
+
+.theme-picker-menu {
+    .theme-menu-item {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+    }
+
+    .theme-name {
+        flex-grow: 1;
+        margin-left: 8px;
+    }
+}
+.theme-circle {
+    border-radius: 50px;
+    border-width: 10px;
+    border-style: solid;
+    height: 0px;
+    width: 0px;
+    margin-left: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}

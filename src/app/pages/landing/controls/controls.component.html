@@ -1,0 +1,61 @@
+<div class="grid-container">
+    <div class="grid-item full-width">
+        <div class="header">
+            <h1 class="title">Web Mixer</h1>
+            <!-- Show select in the header if landscape mobile -->
+            @if (isLandscapeMobile) {
+            <ng-container *ngTemplateOutlet="select"></ng-container>
+            }
+
+            <div class="btn-group">
+                <theme-picker></theme-picker>
+                <button
+                    mat-icon-button
+                    matTooltip="Refresh List"
+                    (click)="apiService.refreshProcesses()"
+                >
+                    <mat-icon>refresh</mat-icon>
+                </button>
+                <button mat-icon-button (click)="openSettingsDialog()">
+                    <mat-icon>settings</mat-icon>
+                </button>
+            </div>
+        </div>
+        <!-- Show select below the header if not landscape mobile -->
+        @if (!isLandscapeMobile) {
+        <ng-container *ngTemplateOutlet="select"></ng-container>
+        }
+    </div>
+    @if (selectedProcesses.length > 0) {
+    <div class="grid-item scrollable-columns">
+        @for (process of selectedProcesses; track process) {
+        <div class="column">
+            <volume-slider
+                [process]="process"
+                (volumeChange)="onVolumeChange($event)"
+            ></volume-slider>
+        </div>
+        }
+    </div>
+    } @else {
+    <p class="notice">Select an App above to adjust levels</p>
+    }
+</div>
+<ng-template #select>
+    <mat-form-field class="select">
+        <mat-label>Choose an app</mat-label>
+        <mat-select
+            [(ngModel)]="selectedProcesses"
+            (ngModelChange)="updateSelection($event)"
+            name="apps"
+            multiple
+            [compareWith]="compareProcesses"
+        >
+            @for (process of apiService.activeProcesses(); track process.id) {
+            <mat-option [value]="process">{{
+                (process.name | titlecase) + ' - ' + process.id
+            }}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+</ng-template>

@@ -1,0 +1,17 @@
+.fab {
+    left: 10px;
+    bottom: 10px;
+    position: fixed !important;
+}
+
+.fab-animation {
+    animation: slide-in-fwd-left 2s ease both;
+    -webkit-animation: slide-in-fwd-left 2s ease both;
+    animation-delay: 2s;
+}
+
+.info-button {
+    right: 10px;
+    bottom: 10px;
+    position: fixed !important;
+}

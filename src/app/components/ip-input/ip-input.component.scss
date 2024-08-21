@@ -1,0 +1,25 @@
+.center {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    flex-direction: column;
+}
+
+.ip-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    width: 15rem;
+
+    p {
+        margin: auto;
+        padding-bottom: 1rem;
+    }
+
+    button {
+        margin: auto;
+        width: 10rem;
+    }
+}

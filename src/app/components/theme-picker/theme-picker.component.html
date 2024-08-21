@@ -1,0 +1,39 @@
+<!-- theme-picker.component.html -->
+<button
+    mat-icon-button
+    [mat-menu-trigger-for]="themeMenu"
+    aria-label="Select a theme"
+    matTooltip="Select a theme"
+>
+    <mat-icon>format_color_fill</mat-icon>
+</button>
+
+<mat-menu #themeMenu="matMenu" xPosition="before" class="theme-picker-menu">
+    @for (theme of themes; track theme.name) {
+    <button
+        mat-menu-item
+        (click)="selectTheme(theme.name)"
+        class="theme-menu-item"
+    >
+        <mat-icon
+            [class.theme-selected-icon]="selectedTheme === theme.name"
+            [color]="selectedTheme === theme.name ? 'accent' : undefined"
+        >
+            {{
+                selectedTheme === theme.name
+                    ? 'radio_button_checked'
+                    : 'radio_button_unchecked'
+            }}
+        </mat-icon>
+        <span class="theme-name">{{ theme.displayName }} </span>
+        <div
+            class="theme-circle"
+            [style.border-right-color]="theme.background"
+            [style.border-bottom-color]="theme.background"
+            [style.border-left-color]="theme.color"
+            [style.border-top-color]="theme.color"
+            [style.background-color]="theme.background"
+        ></div>
+    </button>
+    }
+</mat-menu>

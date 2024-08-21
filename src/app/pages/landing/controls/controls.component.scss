@@ -1,0 +1,119 @@
+.grid-container {
+    display: grid;
+    margin: auto;
+    margin-top: 0;
+    grid-template-rows: 30vh 1fr;
+    grid-template-columns: 1fr;
+    height: 100vh;
+}
+
+.full-width {
+    margin: auto;
+    width: 90%;
+    grid-column: 1 / -1;
+}
+
+.scrollable-columns {
+    display: grid;
+    grid-auto-flow: column; /* Ensure columns flow horizontally */
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    overflow-x: auto; /* Allow horizontal scrolling if too many columns */
+    grid-template-columns: repeat(auto-fill, fit-content);
+    gap: 1rem;
+}
+
+.column {
+    margin-right: 3rem;
+    padding: 0 4rem 4rem;
+    box-sizing: border-box;
+}
+
+.notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Fix for maintaining spacing between mat-select and sliders */
+.grid-container {
+    display: grid;
+    grid-template-rows: auto 1fr; /* Allow content to adapt naturally */
+    gap: 1rem;
+}
+
+.select {
+    padding-top: 5vh; /* Adjust padding to keep a fixed distance */
+    width: 100%;
+}
+
+.scrollable-columns {
+    margin-top: 1rem; /* Ensure spacing stays consistent */
+}
+
+/* Responsive Header Adjustments */
+.header {
+    display: flex;
+    margin-top: 5vh;
+    max-height: 10vh;
+    justify-content: center;
+    align-items: baseline;
+    text-align: center;
+
+    .title {
+        justify-self: center;
+        font-weight: 500;
+        font-size: 10rem;
+    }
+
+    .btn-group {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    @media only screen and (max-height: 400px) and (orientation: landscape) {
+        .title {
+            white-space: nowrap;
+            font-size: 1.5rem; /* Reduce font size on small screens */
+        }
+        gap: 2rem;
+    }
+}
+
+.header::before {
+    content: '';
+    flex: 1;
+}
+
+/* Responsive Design for smaller screens */
+@media only screen and (max-width: 767px) {
+    .select {
+        padding-top: 1rem; /* Reduce padding for smaller screens */
+    }
+
+    .scrollable-columns {
+        width: 100%;
+        margin-top: 0.5rem; /* Adjust for better spacing */
+        gap: 0.5rem;
+
+        .column {
+            margin-right: 0px;
+            min-width: 30%; /* Adjust column width for smaller screens */
+        }
+    }
+}
+
+@media only screen and (max-height: 500px) and (orientation: landscape) {
+    .scrollable-columns {
+        width: 100%;
+        margin-top: 4rem; /* Adjust for better spacing */
+
+        .column {
+            margin-right: 0px;
+            min-width: 30%; /* Adjust column width for smaller screens */
+        }
+    }
+}
