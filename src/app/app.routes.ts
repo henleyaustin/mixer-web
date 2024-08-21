@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { ControlsComponent } from './pages/landing/controls/controls.component';
 import { DemoComponent } from './pages/demo/demo.component';
 import { LandingComponent } from './pages/landing/landing.component';
 
