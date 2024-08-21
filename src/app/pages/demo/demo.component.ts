@@ -61,7 +61,6 @@ export const demoList: ProcessInfo[] = [
     styleUrl: './demo.component.scss'
 })
 export class DemoComponent {
-    private themeService = inject(ThemeService);
     private breakpointObserver = inject(BreakpointObserver);
 
     private toastr = inject(ToastrService);
@@ -73,10 +72,6 @@ export class DemoComponent {
     isLandscapeMobile: boolean = false;
 
     ngOnInit (): void {
-        const storedTheme = this.themeService.getStoredTheme();
-        if (storedTheme) {
-            this.themeService.setTheme(storedTheme);
-        }
         this.checkLandscapeMobile();
     }
 
