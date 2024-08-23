@@ -29,7 +29,7 @@ export class ApiService {
     activeProcesses = signal<ProcessInfo[]>([]);
 
     // Computed signal to construct the API address based on the client's IP address
-    apiAddress = computed(() => `https://${this.clientIpAddress()}/api`);
+    apiAddress = computed(() => `https://${this.clientIpAddress()}/audio`);
 
     constructor () {
         // Retrieve cached IP and port from local storage (if available) and set them as the client IP address
@@ -68,19 +68,17 @@ export class ApiService {
      * The fetched processes are stored in the `activeProcesses` signal.
      */
     refreshProcesses = () => {
-        this.http
-            .get<ProcessInfo[]>(`${this.apiAddress()}/audio/audio-processes`)
-            .subscribe({
-                next: (response: ProcessInfo[]) => {
-                    this.activeProcesses.set(response);
-                },
-                error: err => {
-                    this.toastr.error(
-                        'Error when fetching windows processes - View console'
-                    );
-                    console.log(err);
-                }
-            });
+        this.http.get<ProcessInfo[]>(`${this.apiAddress()}`).subscribe({
+            next: (response: ProcessInfo[]) => {
+                this.activeProcesses.set(response);
+            },
+            error: err => {
+                this.toastr.error(
+                    'Error when fetching windows processes - View console'
+                );
+                console.log(err);
+            }
+        });
     };
 
     /**
@@ -91,9 +89,9 @@ export class ApiService {
      */
     changeVolume = (processId: number, volume: number) => {
         this.http
-            .post(`${this.apiAddress()}/audio/set_volume`, {
-                processId: processId,
-                volume: volume / 100.0
+            .post(`${this.apiAddress()}`, {
+                sessionId: processId,
+                newVolume: volume / 100.0
             })
             .subscribe({
                 next: () => {
