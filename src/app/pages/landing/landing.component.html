@@ -1,6 +1,12 @@
-@if (!!!apiService.clientApiIp() && !!!apiService.clientApiPort()) {
-<app-ip-input></app-ip-input>
-<button mat-fab extended class="fab fab-animation" routerLink="/demo">
+@if (!!!apiService.clientServerAddress()) {
+<app-address-input></app-address-input>
+<button
+    mat-fab
+    extended
+    aria-label="Open the demo screen"
+    class="fab fab-animation"
+    routerLink="/demo"
+>
     Dont have the server? Demo the app!
 </button>
 } @else {

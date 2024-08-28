@@ -11,13 +11,11 @@
                 <theme-picker></theme-picker>
                 <button
                     mat-icon-button
+                    aria-label="Refresh the list of audio processes"
                     matTooltip="Refresh List"
-                    (click)="apiService.refreshProcesses()"
+                    (click)="loadProcesses()"
                 >
                     <mat-icon>refresh</mat-icon>
-                </button>
-                <button mat-icon-button (click)="openSettingsDialog()">
-                    <mat-icon>settings</mat-icon>
                 </button>
             </div>
         </div>
@@ -43,13 +41,18 @@
 </div>
 <ng-template #select>
     <mat-form-field class="select">
+        @if (apiService.activeProcesses().length > 0) {
         <mat-label>Choose an app</mat-label>
+        } @else {
+        <mat-label>No active apps with volume control!</mat-label>
+        }
         <mat-select
             [(ngModel)]="selectedProcesses"
             (ngModelChange)="updateSelection($event)"
             name="apps"
             multiple
             [compareWith]="compareProcesses"
+            aria-label="Select an app to adjust volume"
         >
             @for (process of apiService.activeProcesses(); track process.id) {
             <mat-option [value]="process">{{
