@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Connection Failed</h2>
+<mat-dialog-content>
+    <p>
+        We couldn't fetch the processes from the server. Please check your
+        connection, update the address below, or try again.
+    </p>
+
+    <div class="update-form">
+        <mat-form-field
+            appearance="fill"
+            [style.width.%]="100"
+            subscriptSizing="dynamic"
+        >
+            <mat-label>Current Server Address</mat-label>
+            <input matInput matTextareaAutosize [formControl]="currAddress" />
+        </mat-form-field>
+        <button
+            mat-button
+            color="primary"
+            (click)="onUpdate()"
+            matTooltip="Update server address"
+            [disabled]="!currAddress.dirty"
+        >
+            Update
+        </button>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="onRetry()">Retry</button>
+    <button mat-button (click)="onClear()">Clear Address</button>
+</mat-dialog-actions>

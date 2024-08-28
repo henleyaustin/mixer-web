@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { IpInputComponent } from '../../components/ip-input/ip-input.component';
+import { AddressInputComponent } from '../../components/address-input/address-input.component';
 import { ControlsComponent } from './controls/controls.component';
 import { ApiService } from '../../_services/api.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
     standalone: true,
     imports: [
         ControlsComponent,
-        IpInputComponent,
+        AddressInputComponent,
         MatButtonModule,
         RouterLink,
         MatIconModule,

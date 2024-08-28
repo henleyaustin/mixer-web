@@ -1,9 +1,5 @@
-import {
-    BreakpointObserver,
-    Breakpoints,
-    LayoutModule
-} from '@angular/cdk/layout';
-import { Component, inject } from '@angular/core';
+import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, TitleCasePipe } from '@angular/common';
@@ -18,12 +14,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProcessInfo } from '../../../_models/ProcessInfo';
 import { ApiService } from '../../../_services/api.service';
 import { StorageService } from '../../../_services/storage.service';
-import { ThemeService } from '../../../_services/theme.service';
-import { IpInputComponent } from '../../../components/ip-input/ip-input.component';
-import { SettingsComponent } from '../../../components/settings/settings.component';
+import { AddressInputComponent } from '../../../components/address-input/address-input.component';
 import { ThemePickerComponent } from '../../../components/theme-picker/theme-picker.component';
 import { VolumeSliderComponent } from '../../../components/volume-slider/volume-slider.component';
 import { CacheKeys } from '../../../_models/CacheKeys';
+import { RetryDialogComponent } from '../../../components/retry-dialog/retry-dialog.component';
 
 @Component({
     selector: 'app-controls',
@@ -44,12 +39,12 @@ import { CacheKeys } from '../../../_models/CacheKeys';
         MatListModule,
         TitleCasePipe,
         LayoutModule,
-        IpInputComponent
+        AddressInputComponent
     ],
     templateUrl: './controls.component.html',
     styleUrl: './controls.component.scss'
 })
-export class ControlsComponent {
+export class ControlsComponent implements OnInit {
     storageService = inject(StorageService);
     apiService = inject(ApiService);
     breakpointObserver = inject(BreakpointObserver);
@@ -60,16 +55,45 @@ export class ControlsComponent {
     isLandscapeMobile: boolean = false;
 
     ngOnInit (): void {
-        this.apiService.refreshProcesses();
-        this.selectedProcesses =
+        this.loadProcesses();
+    }
+
+    fetchSelectedProcesses () {
+        const processes: ProcessInfo[] =
             this.storageService.getLocalItem(CacheKeys.SELECTED_PROCESSES) ||
             [];
 
-        this.checkLandscapeMobile();
+        const matchingProcesses = processes.filter(selectedProcess => {
+            return this.apiService
+                .activeProcesses()
+                .some(
+                    activeProcess =>
+                        activeProcess.name === selectedProcess.name ||
+                        activeProcess.id === selectedProcess.id
+                );
+        });
+
+        this.updateSelection(matchingProcesses);
+        this.selectedProcesses = matchingProcesses;
     }
 
-    updateSelection ($event: ProcessInfo[]) {
-        this.storageService.setLocalItem(CacheKeys.SELECTED_PROCESSES, $event);
+    loadProcesses (): void {
+        this.apiService.fetchProcesses().subscribe({
+            next: () => {
+                this.fetchSelectedProcesses();
+                this.checkLandscapeMobile();
+            },
+            error: () => {
+                this.openRetryDialog();
+            }
+        });
+    }
+
+    updateSelection (processes: ProcessInfo[]) {
+        this.storageService.setLocalItem(
+            CacheKeys.SELECTED_PROCESSES,
+            processes
+        );
     }
 
     onVolumeChange ($event: { processId: number; newVolume: number }) {
@@ -78,9 +102,17 @@ export class ControlsComponent {
         this.apiService.changeVolume(processId, newVolume);
     }
 
-    openSettingsDialog (): void {
-        const dialogRef = this.dialog.open(SettingsComponent, {
+    openRetryDialog (): void {
+        const dialogRef = this.dialog.open(RetryDialogComponent, {
+            width: 'auto',
             height: 'auto'
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.loadProcesses();
+            } else {
+            }
         });
     }
 

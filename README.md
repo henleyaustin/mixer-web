@@ -15,16 +15,22 @@ This app allows you to control the volume of programs running on your Windows PC
 3. Run `npm install` to install all necessary dependencies.
 4. Use the npm script `npm run start-open` to start the app on your local network.
 5. Make sure the backend is running on your Windows PC (see backend setup instructions).
-6. Update the IP address on the _ip_ screen to match your PC’s IP.
+6. Update the address on the _server_ screen to match your PC’s server address.
 
 ## Tech Stack
 
 - **Frontend**: Angular
-- **Backend**: [[Link to Backend Repo](https://github.com/henleyaustin/mixer-api)]
+- **Node.JS Backend** (**Released**): [Link to Node Backend](https://github.com/henleyaustin/mixer-node)
+- **.NET Backend** (**WIP**): [Link to Backend Repo](https://github.com/henleyaustin/mixer-api)
+
 
 ## Demo
 
 Try out the app in demo mode to see how it works without needing to connect to a real backend.
+
+## **License**
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ---
 

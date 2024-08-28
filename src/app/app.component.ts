@@ -1,19 +1,12 @@
-import {
-    Component,
-    inject,
-    OnInit,
-    TemplateRef,
-    ViewChild
-} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ThemeService } from './_services/theme.service';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
-import * as packageJson from '../../package.json';
+import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
 
 @Component({
     selector: 'app-root',
@@ -30,11 +23,6 @@ import * as packageJson from '../../package.json';
     styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-    @ViewChild('infoTemplate', { static: true })
-    infoTemplate!: TemplateRef<any>;
-    gitHubIcon = faGithub;
-    linkedInIcon = faLinkedin;
-    version = packageJson.version;
     themeService = inject(ThemeService);
     private dialog = inject(MatDialog);
 
@@ -43,7 +31,7 @@ export class AppComponent implements OnInit {
     }
 
     openInfoDialog (): void {
-        const dialogRef = this.dialog.open(this.infoTemplate, {
+        const dialogRef = this.dialog.open(InfoDialogComponent, {
             height: 'auto'
         });
     }

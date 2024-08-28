@@ -13,7 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ProcessInfo } from '../../_models/ProcessInfo';
 import { ThemeService } from '../../_services/theme.service';
-import { IpInputComponent } from '../../components/ip-input/ip-input.component';
+import { AddressInputComponent } from '../../components/address-input/address-input.component';
 import { ThemePickerComponent } from '../../components/theme-picker/theme-picker.component';
 import { VolumeSliderComponent } from '../../components/volume-slider/volume-slider.component';
 import { RouterLink } from '@angular/router';
@@ -52,7 +52,7 @@ export const demoList: ProcessInfo[] = [
         MatListModule,
         TitleCasePipe,
         LayoutModule,
-        IpInputComponent,
+        AddressInputComponent,
         RouterLink,
         MatDialogModule,
         FontAwesomeModule

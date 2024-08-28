@@ -11,6 +11,7 @@
                 <theme-picker></theme-picker>
                 <button
                     mat-icon-button
+                    aria-label="Refresh the list of audio processes"
                     matTooltip="Refresh List"
                     (click)="simulateRefresh()"
                 >
@@ -43,6 +44,7 @@
             name="apps"
             multiple
             [compareWith]="compareProcesses"
+            aria-label="Select an app to adjust volume"
         >
             @for (process of demoList; track process.id) {
             <mat-option [value]="process">{{

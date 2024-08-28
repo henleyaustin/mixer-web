@@ -5,64 +5,8 @@
 <button
     mat-icon-button
     class="info-button"
-    aria-label="Example icon button with a vertical three dot icon"
+    aria-label="Open info dialog"
     (click)="openInfoDialog()"
 >
     <mat-icon>info</mat-icon>
 </button>
-
-<ng-template #infoTemplate>
-    <h2 mat-dialog-title>More Information</h2>
-
-    <mat-dialog-content>
-        <div class="info-dialog">
-            <mat-accordion multi>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title> About The App </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <p>
-                        This application was built using Angular for the
-                        frontend and a .NET backend that runs directly on the
-                        user's computer. It's a fun small project with more
-                        enhancements planned for the future.
-                    </p>
-                    <p><strong>Current App Version: </strong>{{ version }}</p>
-                </mat-expansion-panel>
-
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title> Who Created This </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <p><strong>Built by Austin Henley</strong></p>
-                    <p>
-                        If you're interested in following the progress or
-                        reaching out, feel free to connect with me on LinkedIn
-                        or check out my GitHub for more small projects.
-                    </p>
-                    <a
-                        mat-icon-button
-                        href="https://www.linkedin.com/in/henleyaustin/"
-                    >
-                        <fa-icon
-                            [icon]="linkedInIcon"
-                            size="2x"
-                            style="font-size: 20px"
-                        ></fa-icon>
-                    </a>
-
-                    <a mat-icon-button href="https://github.com/henleyaustin">
-                        <fa-icon
-                            [icon]="gitHubIcon"
-                            size="2x"
-                            style="font-size: 20px"
-                        ></fa-icon>
-                    </a>
-                </mat-expansion-panel>
-            </mat-accordion>
-        </div>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>Close</button>
-    </mat-dialog-actions>
-</ng-template>
